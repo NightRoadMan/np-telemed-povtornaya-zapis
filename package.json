@@ -1,0 +1,19 @@
+{
+  "name": "np-telemed-povtornaya-zapis",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Прототип: телемед в блоке «Повторная запись» (НаПоправку, PR-1478)",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port ${PORT:-5173} --strictPort",
+    "start": "npm run dev",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port ${PORT:-4173} --strictPort"
+  },
+  "dependencies": {
+    "@fontsource/montserrat": "^5.2.5"
+  },
+  "devDependencies": {
+    "vite": "^7.1.0"
+  }
+}
