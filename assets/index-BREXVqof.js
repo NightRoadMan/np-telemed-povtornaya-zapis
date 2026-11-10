@@ -14,10 +14,10 @@
   </article>`}function S(t,n,o){return`<article class="card tmc" data-tm-for="${n.id}" data-tm-i="${o}">
     <span class="maxmark"></span>
     <div class="top">
-      <p class="rec-note">Рекомендация на основе прошедшего приёма</p>
       <div class="doc">
         <div class="drow">${w(t,"tmbg")}<div style="flex:1;min-width:0"><div class="name">${t.name}</div>${L(t.rate,t.rev)}</div></div>
         <div class="tags"><span class="tag f">${n.spec}</span><span class="tag">${n.age}</span></div>
+        <p class="rec-note">Рекомендация на основе прошедшего приёма</p>
       </div>
       <div><div class="svc">Онлайн-консультация врача</div><div class="pr">${y}</div></div>
       <div class="pred ${t.pred[0]}">${l(t.pred[0]==="g"?"flash":"chat")}${t.pred[1]}</div>
