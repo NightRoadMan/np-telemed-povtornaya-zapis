@@ -96,6 +96,7 @@ function tmCard(t, ip, i){
   return `<article class="card tmc" data-tm-for="${ip.id}" data-tm-i="${i}">
     <span class="maxmark"></span>
     <div class="top">
+      <p class="rec-note">Рекомендация на основе прошедшего приёма</p>
       <div class="doc">
         <div class="drow">${pic(t,'tmbg')}<div style="flex:1;min-width:0"><div class="name">${t.name}</div>${rating(t.rate,t.rev)}</div></div>
         <div class="tags"><span class="tag f">${ip.spec}</span><span class="tag">${ip.age}</span></div>
