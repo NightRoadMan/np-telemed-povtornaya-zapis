@@ -4,7 +4,7 @@
     --text:#0d0d0d; --text-light:#929297; --border:#eaebed;
     --brand:#31858c; --brand-tint:#e6f4f6; --brand-acc:#61b7c6;
     --base-tint:#f4f5f6; --solid:#3f4045; --inverse:#ffffff;
-    --tm:#7d3bee; --tm-tint:#f2ebff; --tm-acc:#8037fc;
+    --tm:#7d3bee; --tm-tint:#f2ebff; --tm-acc:#8037fc; --tm-on-tint:#7d3bee;
     --pos:#4e9b4d; --pos-soft:#f4fbf4;
     --warn:#d9892d; --warn-soft:#fff8f0;
     --neg:#e66161; --neg-tint:#ffebeb; --info:#4886e2; --info-tint:#f0f6ff;
@@ -19,7 +19,7 @@
     --text:#ffffff; --text-light:#7a7a7f; --border:#3f4045;
     --brand:#61b7c6; --brand-tint:#213a3e; --brand-acc:#61b7c6;
     --base-tint:#313132; --solid:#ffffff; --inverse:#1a1a1a;
-    --tm:#9a5ffd; --tm-tint:#3d2860; --tm-acc:#8037fc;
+    --tm:#9a5ffd; --tm-tint:#3d2860; --tm-acc:#8037fc; --tm-on-tint:#d2bbff;
     --pos:#baebb9; --pos-soft:#2a3b2a;
     --warn:#ffc98a; --warn-soft:#3b2f22;           /* not in the dark frames — assumed */
     --neg:#ff7777; --neg-tint:#4d2929; --info:#66a3ff; --info-tint:#30456a;
@@ -121,7 +121,7 @@
 
   .tags{display:flex;gap:4px;flex-wrap:nowrap;overflow:hidden}
   /* telemed card: says it is a recommendation, not an in-person appointment */
-  .rec-note{font-size:12px;line-height:16px;font-weight:500;letter-spacing:-.3px;color:var(--text-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .rec-note{margin:-16px -16px -8px;padding:8px 16px;border-radius:16px 16px 0 0;background:var(--tm-tint);color:var(--tm-on-tint);font-size:12px;line-height:16px;font-weight:500;letter-spacing:-.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .tag{flex:none;padding:2px 8px;border-radius:16px;font-size:12px;line-height:16px;font-weight:600;color:var(--tm)}
   .tag.f{background:var(--tm-tint)}
   .pred{height:48px;display:flex;gap:8px;align-items:center;padding:8px;border-radius:12px;font-size:12px;line-height:16px;font-weight:600}
