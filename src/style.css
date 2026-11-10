@@ -122,6 +122,11 @@
   .tags{display:flex;gap:4px;flex-wrap:nowrap;overflow:hidden}
   /* telemed card: says it is a recommendation, not an in-person appointment */
   .rec-note{display:flex;align-items:center;gap:4px;color:var(--tm);font-size:12px;line-height:16px;font-weight:500;white-space:nowrap;overflow:hidden}
+  /* ярлык над кнопкой: одна строка, без курсива, вплотную к кнопке */
+  .cta{display:flex;flex-direction:column;align-items:center}
+  .rec-tab{display:flex;align-items:center;gap:4px;height:24px;max-width:calc(100% - 32px);padding:4px 12px;border-radius:12px 12px 0 0;
+    background:var(--tm-tint);color:var(--tm-on-tint);font-size:12px;line-height:16px;font-weight:500;white-space:nowrap;overflow:hidden}
+  .rec-tab span{overflow:hidden;text-overflow:ellipsis}
   .rec-note span{overflow:hidden;text-overflow:ellipsis}
   .tag{flex:none;padding:2px 8px;border-radius:16px;font-size:12px;line-height:16px;font-weight:600;color:var(--tm)}
   .tag.f{background:var(--tm-tint)}

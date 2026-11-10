@@ -11,8 +11,8 @@ const img = k => `${import.meta.env.BASE_URL}assets/${k}`;
 
 /* ---------------- data ---------------- */
 const IP = {
-  kanoatov:{id:'kanoatov',name:'Каноатов Джахонгир Якубович',pic:'doc_kanoatov.png',rate:'5.0',rev:'246 отзывов',metro:'Комендантский пр-кт (800 м)',spec:'Терапевт',age:'Взрослый',svc:'Приём терапевта'},
-  smirnova:{id:'smirnova',name:'Смирнова Елена Викторовна',pic:'doc_smirnova.png',rate:'4.9',rev:'478 отзывов',metro:'Большой пр-т П.С. (600 м)',spec:'Невролог',age:'Взрослый',svc:'Приём невролога'},
+  kanoatov:{id:'kanoatov',name:'Каноатов Джахонгир Якубович',pic:'doc_kanoatov.png',rate:'5.0',rev:'246 отзывов',metro:'Комендантский пр-кт (800 м)',spec:'Терапевт',age:'Взрослый',svc:'Приём терапевта',gen:'терапевта',visit:'18 июля'},
+  smirnova:{id:'smirnova',name:'Смирнова Елена Викторовна',pic:'doc_smirnova.png',rate:'4.9',rev:'478 отзывов',metro:'Большой пр-т П.С. (600 м)',spec:'Невролог',age:'Взрослый',svc:'Приём невролога',gen:'невролога',visit:'3 июля'},
 };
 const TMS = {
   'Терапевт':[
@@ -48,7 +48,7 @@ const SCEN = [
 
 const CHIPS = ['Взрослый невролог','МРТ позвоночника','Педиатр','Анализы'];
 
-const state = {theme:'light', scen:'slots', hl:false, chip:0, booked:new Set()};
+const state = {theme:'light', scen:'slots', hl:false, note:'tab', copy:'visit', chip:0, booked:new Set()};
 
 document.getElementById('statusImg').src = img('status_right.svg');
 
@@ -92,6 +92,10 @@ function ipCard(d, st){
   </article>`;
 }
 
+/* why this telemed card is here — concrete past visit, or a generic line */
+const recText = ip => state.copy==='visit' ? `После приёма ${ip.gen} ${ip.visit}` : 'На основе прошедшего приёма';
+const recNote = (ip, cls) => `<p class="${cls}">${ic('history')}<span>${recText(ip)}</span></p>`;
+
 function tmCard(t, ip, i){
   return `<article class="card tmc" data-tm-for="${ip.id}" data-tm-i="${i}">
     <span class="maxmark"></span>
@@ -99,12 +103,12 @@ function tmCard(t, ip, i){
       <div class="doc">
         <div class="drow">${pic(t,'tmbg')}<div style="flex:1;min-width:0"><div class="name">${t.name}</div>${rating(t.rate,t.rev)}</div></div>
         <div class="tags"><span class="tag f">${ip.spec}</span><span class="tag">${ip.age}</span></div>
-        <p class="rec-note">${ic('history')}<span>На основе прошедшего приёма</span></p>
+        ${state.note==='tags' ? recNote(ip,'rec-note') : ''}
       </div>
       <div><div class="svc">Онлайн-консультация врача</div><div class="pr">${TM_PRICE}</div></div>
       <div class="pred ${t.pred[0]}">${ic(t.pred[0]==='g'?'flash':'chat')}${t.pred[1]}</div>
     </div>
-    <button class="btn tm">Обратиться онлайн</button>
+    <div class="cta">${state.note==='tab' ? recNote(ip,'rec-tab') : ''}<button class="btn tm">Обратиться онлайн</button></div>
   </article>`;
 }
 
@@ -112,6 +116,8 @@ function render(){
   const sc = SCEN.find(s=>s.id===state.scen);
   document.getElementById('theme').innerHTML = [['light','Светлая'],['dark','Тёмная']].map(([k,l])=>`<button class="${k===state.theme?'on':''}" data-theme="${k}">${l}</button>`).join('');
   document.getElementById('scen').innerHTML = SCEN.map(s=>`<button class="opt ${s.id===state.scen?'on':''}" data-scen="${s.id}">${s.t}<small>${s.s}</small></button>`).join('');
+  document.getElementById('note').innerHTML = [['tab','Ярлык над кнопкой'],['tags','Строка под тегами']].map(([k,l])=>`<button class="${k===state.note?'on':''}" data-note="${k}">${l}</button>`).join('');
+  document.getElementById('copy').innerHTML = [['visit','С датой приёма'],['generic','Общий']].map(([k,l])=>`<button class="${k===state.copy?'on':''}" data-copy="${k}">${l}</button>`).join('');
   document.getElementById('hl').innerHTML = [[true,'Показать'],[false,'Скрыть']].map(([k,l])=>`<button class="${k===state.hl?'on':''}" data-hl="${k}">${l}</button>`).join('');
   document.getElementById('rule').innerHTML = sc.rule + `<ul>
     <li>Высота карточек в карусели = высота самой высокой карточки (очной или телемеда).</li>
@@ -178,6 +184,8 @@ document.addEventListener('click', e=>{
   if(ds.theme){ state.theme=ds.theme; render(); return; }
   if(ds.scen){ state.scen=ds.scen; state.booked.clear(); render(); return; }
   if(ds.hl){ state.hl = ds.hl==='true'; render(); return; }
+  if(ds.note){ state.note = ds.note; render(); return; }
+  if(ds.copy){ state.copy = ds.copy; render(); return; }
   if(ds.chip){ state.chip=+ds.chip; render(); return; }
   if(ds.toast){ toast(ds.toast+' (вне прототипа)'); return; }
   if(b.id==='reset'){ state.booked.clear(); render(); toast('Записи сброшены'); return; }
