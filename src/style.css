@@ -121,7 +121,7 @@
 
   .tags{display:flex;gap:4px;flex-wrap:nowrap;overflow:hidden}
   /* telemed card: says it is a recommendation, not an in-person appointment */
-  .rec-note{margin:-16px -16px -8px;padding:8px 16px;border-radius:16px 16px 0 0;background:var(--tm-tint);color:var(--tm-on-tint);font-size:12px;line-height:16px;font-weight:500;letter-spacing:-.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .rec-note{color:var(--tm);font-size:12px;line-height:16px;font-weight:500;letter-spacing:-.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .tag{flex:none;padding:2px 8px;border-radius:16px;font-size:12px;line-height:16px;font-weight:600;color:var(--tm)}
   .tag.f{background:var(--tm-tint)}
   .pred{height:48px;display:flex;gap:8px;align-items:center;padding:8px;border-radius:12px;font-size:12px;line-height:16px;font-weight:600}
